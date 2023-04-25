@@ -42,7 +42,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="map col-lg-6">
+            <div class="map col align-self-start">
                 <iframe
                     width="600"
                     height="450"
@@ -53,41 +53,41 @@
                     src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q={{ destination }}">
                 </iframe>
             </div>
-            <div class="col-lg-6">
+            <div class="col align-self-center">
                 <form method="POST" action="{{ url_for('home') }}" nonvalidate>
-                    {{ form.csrf_token }}
+                    {{ address_form.csrf_token }}
                     <p>
-                        {{ form.destination.label }} <br> {{ form.destination(size=30) }}
-                        {% for err in form.destination.errors %}
+                        {{ address_form.destination.label }} <br> {{ address_form.destination(size=30) }}
+                        {% for err in address_form.destination.errors %}
                         <span style="color:red">{{ err }}</span>
                         {% endfor %}
                     </p>
                     <p>
-                        {{ form.address_1.label }} <br> {{ form.address_1(size=30) }}
-                        {% for err in form.address_1.errors %}
+                        {{ address_form.address_1.label }} <br> {{ address_form.address_1(size=30) }}
+                        {% for err in address_form.address_1.errors %}
                         <span style="color:red">{{ err }}</span>
                         {% endfor %}
                     </p>
                     <p>
-                        {{ form.address_2.label }} <br> {{ form.address_2(size=30) }}
-                        {% for err in form.address_2.errors %}
+                        {{ address_form.address_2.label }} <br> {{ address_form.address_2(size=30) }}
+                        {% for err in address_form.address_2.errors %}
                         <span style="color:red">{{ err }}</span>
                         {% endfor %}
                     </p>
                     <p>
-                        {{ form.address_3.label }} <br> {{ form.address_3(size=30) }}
-                        {% for err in form.address_3.errors %}
+                        {{ address_form.address_3.label }} <br> {{ address_form.address_3(size=30) }}
+                        {% for err in address_form.address_3.errors %}
                         <span style="color:red">{{ err }}</span>
                         {% endfor %}
                     </p>
                     <p>
-                        {{ form.address_4.label }} <br> {{ form.address_4(size=30) }}
-                        {% for err in form.address_4.errors %}
+                        {{ address_form.address_4.label }} <br> {{ address_form.address_4(size=30) }}
+                        {% for err in address_form.address_4.errors %}
                         <span style="color:red">{{ err }}</span>
                         {% endfor %}
 
                     </p>
-                        {{ form.submit }}
+                        {{ address_form.submit }}
                 </form>
                 <div class="dropdown">
                   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -99,6 +99,19 @@
                     <li><a class="dropdown-item" href="#">Link 3</a></li>
                   </ul>
                 </div>
+            </div>
+            <div class="col align-self-end">
+                <h3>Save addresses</h3>
+                 <form method="POST" action="{{ url_for('home') }}" nonvalidate>
+                     {{ save_address_form.csrf_token }}
+                    <p>
+                        {{ save_address_form.name_save.label }} <br> {{ save_address_form.name_save(size=30) }}
+                        {% for err in save_address_form.name_save.errors %}
+                        <span style="color:red">{{ err }}</span>
+                        {% endfor %}
+                    </p>
+                        {{ save_address_form.submit_save }}
+                 </form>
 
             </div>
         </div>

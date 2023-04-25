@@ -32,7 +32,7 @@
 									{% endfor %}
 								</p>
 								<p>
-									{{ form.password.label }} <br> {{form.password(size=30) }}
+									{{ form.password.label }} <br> {{form.password(size=30) }} {{wrong_credentials}}
 									{% for err in form.password.errors %}
 									<span style="color:red">{{ err }}</span>
 									{% endfor %}

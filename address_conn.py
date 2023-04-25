@@ -8,27 +8,27 @@ class AddressConn:
         self._conn = sqlite3.connect("user.db")
         self._c = self._conn.cursor()
 
-    def insert_user(self, name, address1, address2, address3, address4):
+    def insert_address(self, user_id, name, address1, address2, address3, address4):
         with self._conn:
-            self._c.execute("INSERT INTO userdata (username, password) VALUES (:username, :password)",
-                            {"username": username, "password": password})
+            self._c.execute("INSERT INTO addresses (user_id, name, address1, address2, address3, address4) "
+                            "VALUES (:user_id, :name, :address1, :address2, :address3, :address4)",
+                            {"user_id": user_id, "name": name, "address1": address1, "address2": address2,
+                             "address3": address3, "address4": address4})
 
-    def get_user(self, username):
+    def get_addresses(self, user_id):
         with self._conn:
-            self._c.execute("SELECT * FROM userdata WHERE username = :username", {"username": username})
-            return self._c.fetchone()
+            self._c.execute("SELECT * FROM addresses WHERE user_id = :user_id", {"user_id": user_id})
+            return self._c.fetchall()
 
-    def update_username(self, old_username, new_username):
+    def update_addresses(self, address_id, user_id, name, address1, address2, address3, address4):
         with self._conn:
-            self._c.execute("""UPDATE userdata SET username = :new_username WHERE username = :old_username""",
-                            {"new_username": new_username, "old_username": old_username})
+            self._c.execute("""UPDATE addresses SET address1 = :address1, address2 = :address2, address3 = :address3, 
+                            address4 = :address4 
+                            WHERE id = :address_id""",
+                            {"user_id": user_id, "name": name, "address1": address1, "address2": address2,
+                             "address3": address3, "address4": address4, "id": address_id})
 
-    def update_password(self, username, new_password):
+    def remove_addresses(self, address_id):
         with self._conn:
-            self._c.execute("""UPDATE userdata SET password = :new_password WHERE username = :username""",
-                            {"new_password": new_password, "username": username})
-
-    def remove_user(self, username):
-        with self._conn:
-            self._c.execute("DELETE from userdata WHERE username = :username", {"username": username})
+            self._c.execute("DELETE from addresses WHERE id = :address_id", {"address_id": address_id})
 

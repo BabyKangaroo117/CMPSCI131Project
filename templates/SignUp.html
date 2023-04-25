@@ -38,7 +38,7 @@
                                     {% endfor %}
                                 </p>
                                 <p>
-                                    {{ form.check_password.label }} <br> {{ form.check_password(size=30) }}
+                                    {{ form.check_password.label }} <br> {{ form.check_password(size=30) }} {{ mismatch }}
                                     {% for err in form.check_password.errors %}
                                     <span style="color:red">{{ err }}</span>
                                     {% endfor %}
