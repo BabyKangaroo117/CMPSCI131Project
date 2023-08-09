@@ -115,9 +115,11 @@ class FindDestination:
             first_list = distances[0]
             average_distances = []
             for i in range(len(first_list)):     #0 to len of destinations
+                sum_distances = 0
                 for j in range(len(distances)):  #0 to len of origin addresses. Up to 4
-                    average = (distances[j][i][1]) / len(first_list)
-                    average_distances.append(average)
+                    sum_distances += (distances[j][i][1])
+                average = sum_distances/len(first_list)
+                average_distances.append(average)
 
             return average_distances
 
@@ -128,6 +130,7 @@ class FindDestination:
             if distance < shortest_distance:
                 shortest_distance = distance
         index_shortest_distance = average_distances.index(shortest_distance)
+        print(distances)
         print(index_shortest_distance)
         shortest_distance_destination = distances[0][index_shortest_distance][0]
 

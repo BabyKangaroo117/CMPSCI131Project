@@ -10,6 +10,13 @@ import os
 from dotenv import load_dotenv
 from find_destination import FindDestination
 
+# Test Addresses
+# 506 Starflower St Warrington, PA 18976
+# 3207 hemmingway drive North Whales, PA 19454
+# 550 Valley View Langhorne, PA 19047
+# 563 Woodview ln Harleysville, PA 19438
+
+
 
 load_dotenv()
 API_KEY_GOOGLE = os.getenv("API_KEY_GOOGLE")
@@ -107,8 +114,9 @@ def login():
                 db_user_password = db_user_info[2]
                 if bcrypt.check_password_hash(db_user_password, login_form.password.data):
                     USER.id = db_user_info[1]
-                    login_user(USER)
                     session["username"] = db_user_info[0]
+                    login_user(USER)
+
                     return redirect(url_for("home"))
                 else:
                     wrong_credentials = "The username or password is incorrect"
@@ -163,6 +171,7 @@ def home():
             distances = find_location.calculate_distance(lat_long_origin_addresses, lat_long_dest_addresses)
             shortest_destination = find_location.shortest_distance_destination(distances)
             destination_locations[0] = shortest_destination
+
 
     if save_addresses_form.validate_on_submit():
         user_id = int(session["username"])
